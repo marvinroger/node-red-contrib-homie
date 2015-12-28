@@ -1,4 +1,4 @@
 Node-RED nodes for Homie
 ========================
 
-See https://github.com/marvinroger/homie for more informations.
+See [marvinroger/homie](https://github.com/marvinroger/homie) for more informations.

@@ -26,9 +26,9 @@ module.exports = function (RED) {
     });
 
     this.on('input', function (msg) {
-      var nodeId = node.nodeId || msg.nodeId;
-      var property = node.property || msg.property;
-      var value = node.value || msg.payload;
+      var nodeId = node.nodeId || String(msg.nodeId);
+      var property = node.property || String(msg.property);
+      var value = node.value || String(msg.payload);
       node.device.sendProperty(nodeId, property, value);
     });
   }
