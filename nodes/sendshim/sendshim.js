@@ -16,7 +16,8 @@ module.exports = function (RED) {
 
     this.device = RED.nodes.getNode(config.device);
     this.nodeId = config['node-id'];
-    this.property = { name: config.property };
+    this.property = config.property;
+    this.value = config.value;
 
     this.handleDeviceState(this.device.state);
 
@@ -25,7 +26,10 @@ module.exports = function (RED) {
     });
 
     this.on('input', function (msg) {
-      node.device.sendProperty(node.nodeId, node.property.name, msg.payload);
+      var nodeId = node.nodeId || msg.nodeId;
+      var property = node.property || msg.property;
+      var value = node.value || msg.payload;
+      node.device.sendProperty(nodeId, property, value);
     });
   }
 

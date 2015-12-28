@@ -4,8 +4,9 @@
     color: '#FFAAAA',
     defaults: {
       device: {value: '', type: 'Homie device', required: true},
-      'node-id': {value: '', required: true},
-      property: {value: '', required: true},
+      'node-id': {value: ''},
+      property: {value: ''},
+      value: {value: ''},
       name: {value: ''}
     },
     inputs: 1,
@@ -34,11 +35,19 @@
   </div>
 
   <div class="form-row">
-    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
-    <input type="text" id="node-input-name" placeholder="Name">
+    <label for="node-input-value"><i class="fa fa-font"></i> Value</label>
+    <input type="text" id="node-input-value" placeholder="Value">
   </div>
 </script>
 
 <script type="text/x-red" data-help-name="Homie send from shim">
-  <p>Sets a property to the value specified by <b>msg.payload</b> on a shimmed Homie device.</p>
+  <p>Sets a property on the shimmed Homie device.</p>
+  <p>
+    If a field is left blank, the node will use values from the message:
+  </p>
+  <ul>
+    <li><code>msg.nodeId</code> : The ID of the node concerned</li>
+    <li><code>msg.property</code> : The property to change</li>
+    <li><code>msg.payload</code> : The value of the property</li>
+  </ul>
 </script>

@@ -33,6 +33,17 @@ module.exports = function (RED) {
       node.client.publish(node.topicNamespace + '/$nodes', node.nodes, { qos: 2, retain: true });
       node.client.publish(node.topicNamespace + '/$localip', 'node-red', { qos: 2, retain: true });
       node.client.publish(node.topicNamespace + '/$version', node.firmwareVersion, { qos: 2, retain: true });
+
+      node.client.subscribe(node.topicNamespace + '/+/+/set', { qos: 2 });
+    });
+
+    this.client.on('message', function (topic, message) {
+      var splitted = topic.split('/');
+      var nodeId = splitted[2];
+      var property = splitted[3];
+      var value = message.toString();
+
+      node.events.emit('command', nodeId, property, value);
     });
 
     this.client.on('close', function () {

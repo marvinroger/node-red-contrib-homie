@@ -21,6 +21,10 @@ module.exports = function (RED) {
     this.device.events.on('state', function (state) {
       node.handleDeviceState(state);
     });
+
+    this.device.events.on('command', function (nodeId, property, value) {
+      node.send({ nodeId: nodeId, property: property, payload: value });
+    });
   }
 
   RED.nodes.registerType('Homie shim', Shim);

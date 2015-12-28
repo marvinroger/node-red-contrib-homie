@@ -7,7 +7,7 @@
       name: {value: ''}
     },
     inputs: 0,
-    outputs: 0,
+    outputs: 1,
     icon: "homie.png",
     label: function() {
       return this.name||"Homie shim";
@@ -29,4 +29,14 @@
 
 <script type="text/x-red" data-help-name="Homie shim">
   <p>Shims an Homie device.</p>
+
+  <p>
+    A message is emitted when the shimmed device property is changed.
+    The resulting message has the following properties:
+  </p>
+  <ul>
+    <li><code>msg.nodeId</code> : The ID of the node concerned</li>
+    <li><code>msg.property</code> : The property changed</li>
+    <li><code>msg.payload</code> : The value of the property</li>
+  </ul>
 </script>
