@@ -1,0 +1,29 @@
+{
+  "name": "node-red-contrib-homie",
+  "version": "0.0.1",
+  "description": "Node-RED nodes for the Homie home automation system",
+  "dependencies": {
+    "mqtt": "^1.6.3"
+  },
+  "keywords": [
+    "node-red",
+    "home",
+    "automation",
+    "iot",
+    "mqtt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marvinroger/node-red-contrib-homie.git"
+  },
+  "bugs": "https://github.com/marvinroger/node-red-contrib-homie/issues",
+  "homepage": "https://github.com/marvinroger/node-red-contrib-homie",
+  "license": "GPL-2.0",
+  "node-red": {
+    "nodes": {
+      "Homie device": "nodes/deviceconfig/deviceconfig.js",
+      "Homie shim": "nodes/shim/shim.js",
+      "Homie send from shim": "nodes/sendshim/sendshim.js"
+    }
+  }
+}

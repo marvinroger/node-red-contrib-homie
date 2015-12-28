@@ -1,0 +1,36 @@
+<script type="text/javascript">
+  RED.nodes.registerType('Homie device', {
+    category: 'config',
+    defaults: {
+      server: {value: '', required: true},
+      'device-id': {value: '', required: true},
+      nodes: {value: '', required: true},
+      'firmware-version': {value: '1.0.0', required: true}
+    },
+    label: function() {
+      return this.server + ':' + this['device-id'];
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="Homie device">
+  <div class="form-row">
+    <label for="node-input-server"><i class="fa fa-globe"></i> Homie server</label>
+    <input type="text" id="node-config-input-server">
+  </div>
+
+  <div class="form-row">
+    <label for="node-config-input-device-id"><i class="fa fa-barcode"></i> Device ID</label>
+    <input type="text" id="node-config-input-device-id" placeholder="Device ID">
+  </div>
+
+  <div class="form-row">
+    <label for="node-config-input-nodes"><i class="fa fa-sitemap"></i> Nodes</label>
+    <input type="text" id="node-config-input-nodes" placeholder="Nodes">
+  </div>
+
+  <div class="form-row">
+    <label for="node-config-input-firmware-version"><i class="fa fa-code"></i> Firmware version</label>
+    <input type="text" id="node-config-input-firmware-version" placeholder="Firmware version">
+  </div>
+</script>

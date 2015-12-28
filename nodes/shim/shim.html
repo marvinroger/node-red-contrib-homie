@@ -1,0 +1,32 @@
+<script type="text/javascript">
+  RED.nodes.registerType('Homie shim', {
+    category: 'Homie',
+    color: '#FFAAAA',
+    defaults: {
+      device: {value: '', type: 'Homie device', required: true},
+      name: {value: ''}
+    },
+    inputs: 0,
+    outputs: 0,
+    icon: "homie.png",
+    label: function() {
+      return this.name||"Homie shim";
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="Homie shim">
+  <div class="form-row">
+    <label for="node-input-device"><i class="fa fa-lightbulb-o"></i> Device</label>
+    <input id="node-input-device">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="Homie shim">
+  <p>Shims an Homie device.</p>
+</script>

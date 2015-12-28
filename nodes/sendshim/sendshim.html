@@ -1,0 +1,44 @@
+<script type="text/javascript">
+  RED.nodes.registerType('Homie send from shim', {
+    category: 'Homie',
+    color: '#FFAAAA',
+    defaults: {
+      device: {value: '', type: 'Homie device', required: true},
+      'node-id': {value: '', required: true},
+      property: {value: '', required: true},
+      name: {value: ''}
+    },
+    inputs: 1,
+    outputs: 0,
+    icon: 'homie.png',
+    label: function() {
+      return this.name||'Homie send from shim';
+    }
+  });
+</script>
+
+<script type="text/x-red" data-template-name="Homie send from shim">
+  <div class="form-row">
+    <label for="node-input-device"><i class="fa fa-lightbulb-o"></i> Device</label>
+    <input id="node-input-device">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-node-id"><i class="fa fa-barcode"></i> Node ID</label>
+    <input type="text" id="node-input-node-id" placeholder="Node ID">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-property"><i class="fa fa-tasks"></i> Property</label>
+    <input type="text" id="node-input-property" placeholder="Property">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="Homie send from shim">
+  <p>Sets a property to the value specified by <b>msg.payload</b> on a shimmed Homie device.</p>
+</script>
