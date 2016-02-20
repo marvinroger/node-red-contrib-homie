@@ -10,7 +10,7 @@
       'firmware-version': {value: '1.0.0', required: true},
     },
     label: function() {
-      return this.server + ':' + this['device-id'];
+      return this['mqtt-host'] + ':' + this['mqtt-port'] + ' - ' + this['device-id'];
     }
   });
 </script>
@@ -23,7 +23,7 @@
 
   <div class="form-row">
     <label for="node-config-input-mqtt-port"><i class="fa fa-globe"></i> MQTT port</label>
-    <input type="text" id="node-config-input-mqtt-port">
+    <input type="number" min="1" max="65535" id="node-config-input-mqtt-port">
   </div>
 
   <div class="form-row">

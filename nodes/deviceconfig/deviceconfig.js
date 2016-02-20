@@ -1,3 +1,4 @@
+var ip = require('internal-ip');
 var mqtt = require('mqtt');
 var EventEmitter = require('events').EventEmitter;
 
@@ -33,7 +34,7 @@ module.exports = function (RED) {
 
       node.client.publish(node.baseTopic + '/$online', 'true', { qos: 2, retain: true });
       node.client.publish(node.baseTopic + '/$nodes', node.nodes, { qos: 2, retain: true });
-      node.client.publish(node.baseTopic + '/$localip', 'node-red', { qos: 2, retain: true });
+      node.client.publish(node.baseTopic + '/$localip', ip.v4(), { qos: 2, retain: true });
       node.client.publish(node.baseTopic + '/$fwname', node.firmwareName, { qos: 2, retain: true });
       node.client.publish(node.baseTopic + '/$fwversion', node.firmwareVersion, { qos: 2, retain: true });
 

@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Node-RED nodes for the Homie home automation system",
   "dependencies": {
+    "internal-ip": "^1.1.0",
     "mqtt": "^1.6.3"
   },
   "keywords": [
