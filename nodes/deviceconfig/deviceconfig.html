@@ -5,12 +5,13 @@
       'mqtt-host': {value: '127.0.0.1', required: true},
       'mqtt-port': {value: 1883, required: true},
       'device-id': {value: '', required: true},
+      name: {value: 'Node-RED device', required: true},
       nodes: {value: '', required: true},
       'firmware-name': {value: 'Node-RED', required: true},
       'firmware-version': {value: '1.0.0', required: true},
     },
     label: function() {
-      return this['mqtt-host'] + ':' + this['mqtt-port'] + ' - ' + this['device-id'];
+      return this['mqtt-host'] + ':' + this['mqtt-port'] + ' - ' + this.name + '(' + this['device-id'] + ')';
     }
   });
 </script>
@@ -29,6 +30,11 @@
   <div class="form-row">
     <label for="node-config-input-device-id"><i class="fa fa-barcode"></i> Device ID</label>
     <input type="text" id="node-config-input-device-id" placeholder="Device ID">
+  </div>
+
+  <div class="form-row">
+    <label for="node-config-input-name"><i class="fa fa-barcode"></i> Friendly device name</label>
+    <input type="text" id="node-config-input-name" placeholder="Friendly device name">
   </div>
 
   <div class="form-row">

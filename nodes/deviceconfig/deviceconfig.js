@@ -17,6 +17,7 @@ module.exports = function (RED) {
     this.mqttHost = config['mqtt-host'];
     this.mqttPort = config['mqtt-port'];
     this.deviceId = config['device-id'];
+    this.name = config.name;
     this.nodes = config.nodes;
     this.firmwareName = config['firmware-name'];
     this.firmwareVersion = config['firmware-version'];
@@ -33,6 +34,7 @@ module.exports = function (RED) {
       node.setState('connected');
 
       node.client.publish(node.baseTopic + '/$online', 'true', { qos: 2, retain: true });
+      node.client.publish(node.baseTopic + '/$name', node.name, { qos: 2, retain: true });
       node.client.publish(node.baseTopic + '/$nodes', node.nodes, { qos: 2, retain: true });
       node.client.publish(node.baseTopic + '/$localip', ip.v4(), { qos: 2, retain: true });
       node.client.publish(node.baseTopic + '/$fwname', node.firmwareName, { qos: 2, retain: true });
