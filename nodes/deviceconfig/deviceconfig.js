@@ -13,28 +13,31 @@ module.exports = function (RED) {
       node.events.emit('state', state);
     };
 
-    this.server = config.server;
+    this.mqttHost = config['mqtt-host'];
+    this.mqttPort = config['mqtt-port'];
     this.deviceId = config['device-id'];
     this.nodes = config.nodes;
+    this.firmwareName = config['firmware-name'];
     this.firmwareVersion = config['firmware-version'];
-    this.topicNamespace = 'devices/' + this.deviceId;
+    this.baseTopic = 'devices/' + this.deviceId;
 
     this.client = mqtt.connect({ host: this.server, port: 35589, clientId: this.deviceId, will: {
-      topic: this.topicNamespace + '/$online', payload: 'false', qos: 2, retain: true
+      topic: this.baseTopic + '/$online', payload: 'false', qos: 2, retain: true
     }});
     this.sendProperty = function (nodeId, name, value) {
-      node.client.publish(node.topicNamespace + '/' + nodeId + '/' + name, value, { qos: 2, retain: true });
+      node.client.publish(node.baseTopic + '/' + nodeId + '/' + name, value, { qos: 2, retain: true });
     };
 
     this.client.on('connect', function () {
       node.setState('connected');
 
-      node.client.publish(node.topicNamespace + '/$online', 'true', { qos: 2, retain: true });
-      node.client.publish(node.topicNamespace + '/$nodes', node.nodes, { qos: 2, retain: true });
-      node.client.publish(node.topicNamespace + '/$localip', 'node-red', { qos: 2, retain: true });
-      node.client.publish(node.topicNamespace + '/$version', node.firmwareVersion, { qos: 2, retain: true });
+      node.client.publish(node.baseTopic + '/$online', 'true', { qos: 2, retain: true });
+      node.client.publish(node.baseTopic + '/$nodes', node.nodes, { qos: 2, retain: true });
+      node.client.publish(node.baseTopic + '/$localip', 'node-red', { qos: 2, retain: true });
+      node.client.publish(node.baseTopic + '/$fwname', node.firmwareName, { qos: 2, retain: true });
+      node.client.publish(node.baseTopic + '/$fwversion', node.firmwareVersion, { qos: 2, retain: true });
 
-      node.client.subscribe(node.topicNamespace + '/+/+/set', { qos: 2 });
+      node.client.subscribe(node.baseTopic + '/+/+/set', { qos: 2 });
     });
 
     this.client.on('message', function (topic, message) {
