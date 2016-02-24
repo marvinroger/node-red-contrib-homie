@@ -23,7 +23,7 @@ module.exports = function (RED) {
     this.firmwareVersion = config['firmware-version'];
     this.baseTopic = 'devices/' + this.deviceId;
 
-    this.client = mqtt.connect({ host: this.server, port: 35589, clientId: this.deviceId, will: {
+    this.client = mqtt.connect({ host: this.mqttHost, port: this.mqttPort, clientId: this.deviceId, will: {
       topic: this.baseTopic + '/$online', payload: 'false', qos: 2, retain: true
     }});
     this.sendProperty = function (nodeId, name, value) {
